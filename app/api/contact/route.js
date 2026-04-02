@@ -1,4 +1,4 @@
-export async function POST(req: Request) {
+export async function POST(req) {
   const { name, email, phone, message } = await req.json()
 
   const hookMessage = `📬 Nuevo contacto del formulario web:\n\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nMensaje: ${message}`
