@@ -7,10 +7,18 @@ export default function ContactForm() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // TODO: conectar con tu backend / Formspree / Resend
-    console.log('Formulario enviado:', form)
+    await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.nombre,
+        email: form.correo,
+        phone: form.telefono,
+        message: form.mensaje,
+      })
+    })
     setSent(true)
     setTimeout(() => setSent(false), 4000)
     setForm({ nombre: '', telefono: '', correo: '', mensaje: '' })
